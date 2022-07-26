@@ -1,13 +1,13 @@
-import TodoList from "./TodoList"
-import AddTaskForm from "./AddTaskForm"
-import { useState, useEffect } from 'react';
+import TodoList from "./component/TodoList"
+import AddTaskForm from "./component/AddTaskForm"
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [todoList, setTodoList] = useState([])
+  let todoList = useSelector(state => state.todoList.list)
 
   useEffect(() => {
     document.title = `Todo List (${todoList.length})`
-
     return (() => {
       console.log("destroyed")
     })
@@ -17,9 +17,9 @@ function App() {
     <div className="App">
       <h1 id="app-header">Todo List Application</h1>
 
-      <AddTaskForm todoList={todoList} setTodoList={setTodoList} />
+      <AddTaskForm />
 
-      <TodoList todoList={todoList} setTodoList={setTodoList} />
+      <TodoList />
     </div>
   );
 }
